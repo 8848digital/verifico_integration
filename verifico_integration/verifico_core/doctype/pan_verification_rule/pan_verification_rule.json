@@ -1,7 +1,7 @@
 {
  "actions": [],
  "autoname": "field:rule_name",
- "creation": "2026-09-30 10:00:00.000000",
+ "creation": "2026-10-01 10:00:00.000000",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -15,7 +15,10 @@
   "action",
   "check_on",
   "section_party",
-  "party_field"
+  "party_field",
+  "column_break_party",
+  "prefill_party_pan",
+  "warn_on_pan_change"
  ],
  "fields": [
   {
@@ -94,15 +97,35 @@
    "label": "Party"
   },
   {
-   "description": "Optional Link field naming who the PAN belongs to (e.g. customer). Stored on each verification for audit and reuse.",
+   "description": "Optional Link field naming who the PAN belongs to (e.g. customer). Stored on each verification for audit.",
    "fieldname": "party_field",
    "fieldtype": "Data",
    "label": "Party Field"
+  },
+  {
+   "fieldname": "column_break_party",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "depends_on": "party_field",
+   "description": "On a new document with no PAN, fill in the party's most recent valid PAN.",
+   "fieldname": "prefill_party_pan",
+   "fieldtype": "Check",
+   "label": "Pre-fill Last Verified PAN"
+  },
+  {
+   "default": "1",
+   "depends_on": "party_field",
+   "description": "Warn (without blocking) when the PAN differs from the party's last verified PAN.",
+   "fieldname": "warn_on_pan_change",
+   "fieldtype": "Check",
+   "label": "Warn on Different PAN"
   }
  ],
  "index_web_pages_for_search": 0,
  "links": [],
- "modified": "2026-09-30 10:00:00.000000",
+ "modified": "2026-10-01 10:00:00.000000",
  "modified_by": "Administrator",
  "module": "Verifico Core",
  "name": "PAN Verification Rule",

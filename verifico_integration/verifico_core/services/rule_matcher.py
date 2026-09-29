@@ -18,6 +18,8 @@ RULE_FIELDS = [
 	"action",
 	"check_on",
 	"party_field",
+	"prefill_party_pan",
+	"warn_on_pan_change",
 ]
 
 
@@ -65,13 +67,27 @@ def party_of(doc) -> tuple[str | None, str | None]:
 	Returns:
 	        tuple: (party_doctype, party) or (None, None).
 	"""
-	rules = __rules_for(doc.doctype)
-	field_name = next((rule["party_field"] for rule in rules if rule["party_field"]), None)
-	field = frappe.get_meta(doc.doctype).get_field(field_name) if field_name else None
-	if not (field and doc.get(field_name)):
-		return None, None
+	_rule, party_doctype, party = party_rule(doc)
+	return party_doctype, party
+
+
+def party_rule(doc) -> tuple[dict | None, str | None, str | None]:
+	"""
+	The first rule of the document's DocType that has a Party Field, with the
+	party it points to on this document.
+
+	Parameters:
+	        doc (Document, required): Reference document.
+
+	Returns:
+	        tuple: (rule row, party_doctype, party) — (None, None, None) without a party.
+	"""
+	rule = next((rule for rule in __rules_for(doc.doctype) if rule.get("party_field")), None)
+	field = frappe.get_meta(doc.doctype).get_field(rule["party_field"]) if rule else None
+	if not (field and doc.get(field.fieldname)):
+		return None, None, None
 	party_doctype = field.options if field.fieldtype == "Link" else doc.get(field.options)
-	return party_doctype, doc.get(field_name)
+	return rule, party_doctype, doc.get(field.fieldname)
 
 
 def clear_rule_cache(doctype: str | None = None) -> None:
