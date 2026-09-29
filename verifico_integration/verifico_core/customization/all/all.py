@@ -4,8 +4,9 @@
 # written permission from 8848 Digital LLP.
 
 """
-doc_events "*" targets: every save on the site passes through here, so each
-handler exits after one cached set lookup unless the DocType has a PAN rule.
+doc_events "*" (all DocTypes) hook functions. Every save on the site passes
+through here, so each handler exits after one cached set lookup unless the
+DocType has a PAN Verification Rule; the work itself lives in services/.
 """
 
 from verifico_integration.verifico_core.services.enforcement import enforce_rule, sync_pan_status
