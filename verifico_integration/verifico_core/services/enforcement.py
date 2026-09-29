@@ -9,6 +9,10 @@ import frappe
 from frappe import _
 from frappe.utils import add_days, fmt_money, now_datetime
 
+from verifico_integration.verifico_core.services.party_pan import (
+	prefill_party_pan,
+	warn_on_party_pan_change,
+)
 from verifico_integration.verifico_core.services.rule_matcher import matching_rule
 from verifico_integration.verifico_core.services.verification_log import (
 	LINK_FIELD,
@@ -33,10 +37,12 @@ def sync_pan_status(doc) -> None:
 	Returns:
 	        None
 	"""
+	prefill_party_pan(doc)
 	pan = (doc.get(PAN_FIELD) or "").strip().upper()
 	doc.set(PAN_FIELD, pan or None)
 	if pan and not PAN_PATTERN.match(pan):
 		frappe.throw(_("{0} is not a valid PAN format (e.g. ABCDE1234F)").format(pan))
+	warn_on_party_pan_change(doc, pan)
 
 	result = __current_result(doc, pan) if pan else None
 	doc.set(LINK_FIELD, result.name if result else None)

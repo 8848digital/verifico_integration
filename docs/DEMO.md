@@ -137,6 +137,8 @@ on any failed check.
 
 - **PAN card upload:** attach a photo/PDF of the card instead of typing; the
   app reads and verifies it (uses credits).
+- **Returning customers:** the customer's last verified PAN is pre-filled on new
+  orders, and a warning appears if a different PAN is entered for them.
 - **APIs** for custom screens such as a POS: verify a PAN, read a card, check
   whether an order still needs a PAN.
 - **Safeguards:** no double charge on time-outs, per-user hourly limit, only

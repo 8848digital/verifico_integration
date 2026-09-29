@@ -8,6 +8,7 @@
 import frappe
 
 from verifico_integration.verifico_core.services.enforcement import NOT_VERIFIED
+from verifico_integration.verifico_core.services.party_pan import previous_party_pan
 from verifico_integration.verifico_core.services.rule_matcher import matching_rule
 from verifico_integration.verifico_core.services.verification_log import (
 	LINK_FIELD,
@@ -66,4 +67,6 @@ def result_payload(log) -> dict:
 			"message": log.error or "PAN verification failed",
 			"data": summarize(log),
 		}
-	return {"status": True, "code": 200, "message": messages[log.status], "data": summarize(log)}
+	data = summarize(log)
+	data["previous_party_pan"] = previous_party_pan(log)
+	return {"status": True, "code": 200, "message": messages[log.status], "data": data}

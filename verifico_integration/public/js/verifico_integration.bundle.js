@@ -126,12 +126,19 @@ function showPanResult(data) {
 		[__("Category"), data.category],
 		[__("Credits Used"), data.reused ? __("0 (recent result reused)") : data.credits_used],
 	].filter((row) => row[1] !== undefined && row[1] !== null && row[1] !== "");
+	let message = rows
+		.map(([label, value]) => `<b>${label}:</b> ${frappe.utils.escape_html(String(value))}`)
+		.join("<br>");
+	// The party was verified before with a different PAN: surface it, don't block.
+	if (data.previous_party_pan) {
+		message += `<br><br><span class="text-warning">⚠ ${frappe.utils.escape_html(
+			data.previous_party_pan.message
+		)}</span>`;
+	}
 	frappe.msgprint({
 		title: __("PAN {0}", [__(data.status)]),
 		indicator: STATUS_COLORS[data.status] || "blue",
-		message: rows
-			.map(([label, value]) => `<b>${label}:</b> ${frappe.utils.escape_html(String(value))}`)
-			.join("<br>"),
+		message: message,
 	});
 }
 
