@@ -3,4 +3,6 @@
 # of this file, via any medium, is strictly prohibited without prior
 # written permission from 8848 Digital LLP.
 
-__version__ = "0.0.1"
+from .export_fixtures import export_fixtures
+
+commands = [export_fixtures]

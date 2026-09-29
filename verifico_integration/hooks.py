@@ -1,255 +1,34 @@
+# Copyright (c) 2026 8848 Digital LLP. All rights reserved.
+# Proprietary and confidential. Unauthorized copying, distribution, or use
+# of this file, via any medium, is strictly prohibited without prior
+# written permission from 8848 Digital LLP.
+
 app_name = "verifico_integration"
 app_title = "Verifico Integration"
 app_publisher = "8848 Digital LLP"
 app_description = "Verifico integration for Frappe/ERPNext"
 app_email = "mahak@8848digital.com"
-app_license = "mit"
+app_license = "Proprietary"
 
-# Apps
-# ------------------
+custom_fixtures = [{"dt": "Custom Field", "filters": {"module": "Verifico Core"}}]
 
-# required_apps = []
+commands = ["verifico_integration.commands.export_fixtures.export_fixtures"]
 
-# Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "verifico_integration",
-# 		"logo": "/assets/verifico_integration/logo.png",
-# 		"title": "Verifico Integration",
-# 		"route": "/verifico_integration",
-# 		"has_permission": "verifico_integration.api.permission.has_app_permission"
-# 	}
-# ]
+after_request = [
+	"verifico_integration.utils.api_handlers.response_formatter.format_frappe_response_to_custom"
+]
 
-# Includes in <head>
-# ------------------
-
-# include js, css files in header of desk.html
-# app_include_css = "/assets/verifico_integration/css/verifico_integration.css"
-# app_include_js = "/assets/verifico_integration/js/verifico_integration.js"
-
-# include js, css files in header of web template
-# web_include_css = "/assets/verifico_integration/css/verifico_integration.css"
-# web_include_js = "/assets/verifico_integration/js/verifico_integration.js"
-
-# include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "verifico_integration/public/scss/website"
-
-# include js, css files in header of web form
-# webform_include_js = {"doctype": "public/js/doctype.js"}
-# webform_include_css = {"doctype": "public/css/doctype.css"}
-
-# include js in page
-# page_js = {"page" : "public/js/file.js"}
-
-# include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
-# doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
-# doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
-
-# Svg Icons
-# ------------------
-# include app icons in desk
-# app_include_icons = "verifico_integration/public/icons.svg"
-
-# Home Pages
-# ----------
-
-# application home page (will override Website Settings)
-# home_page = "login"
-
-# website user home page (by Role)
-# role_home_page = {
-# 	"Role": "home_page"
-# }
-
-# Generators
-# ----------
-
-# automatically create page for each record of this doctype
-# website_generators = ["Web Page"]
-
-# Jinja
-# ----------
-
-# add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "verifico_integration.utils.jinja_methods",
-# 	"filters": "verifico_integration.utils.jinja_filters"
-# }
-
-# Installation
-# ------------
-
-# before_install = "verifico_integration.install.before_install"
+# Uncomment and point at the conventional locations as features are added
+# (see CLAUDE.md "Key Conventions"):
+#
 # after_install = "verifico_integration.install.after_install"
-
-# Uninstallation
-# ------------
-
-# before_uninstall = "verifico_integration.uninstall.before_uninstall"
-# after_uninstall = "verifico_integration.uninstall.after_uninstall"
-
-# Integration Setup
-# ------------------
-# To set up dependencies/integrations with other apps
-# Name of the app being installed is passed as an argument
-
-# before_app_install = "verifico_integration.utils.before_app_install"
-# after_app_install = "verifico_integration.utils.after_app_install"
-
-# Integration Cleanup
-# -------------------
-# To clean up dependencies/integrations with other apps
-# Name of the app being uninstalled is passed as an argument
-
-# before_app_uninstall = "verifico_integration.utils.before_app_uninstall"
-# after_app_uninstall = "verifico_integration.utils.after_app_uninstall"
-
-# Desk Notifications
-# ------------------
-# See frappe.core.notifications.get_notification_config
-
-# notification_config = "verifico_integration.notifications.get_notification_config"
-
-# Awesome Bar
-# -----------
-# Extra search results: list of dicts with label, description, route, index.
-# route: ["List", "ToDo"], "/desk/docs/some/page", or "https://example.com"
-# awesomebar_search = ["verifico_integration.search.awesomebar_results"]
-
-# Permissions
-# -----------
-# Permissions evaluated in scripted ways
-
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
 #
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
-
-# DocType Class
-# ---------------
-# Override standard doctype classes
-
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
-
-# Document Events
-# ---------------
-# Hook on document methods and events
-
 # doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
+# 	"<DocType>": {
+# 		"on_update": "verifico_integration.verifico_core.customization.<doctype>.<doctype>.on_update"
 # 	}
 # }
-
-# Scheduled Tasks
-# ---------------
-
+#
 # scheduler_events = {
-# 	"all": [
-# 		"verifico_integration.tasks.all"
-# 	],
-# 	"daily": [
-# 		"verifico_integration.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"verifico_integration.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"verifico_integration.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"verifico_integration.tasks.monthly"
-# 	],
+# 	"hourly": ["verifico_integration.verifico_core.tasks.hourly"],
 # }
-
-# Testing
-# -------
-
-# before_tests = "verifico_integration.install.before_tests"
-
-# Overriding Methods
-# ------------------------------
-#
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "verifico_integration.event.get_events"
-# }
-#
-# each overriding function accepts a `data` argument;
-# generated from the base implementation of the doctype dashboard,
-# along with any modifications made in other Frappe apps
-# override_doctype_dashboards = {
-# 	"Task": "verifico_integration.task.get_dashboard_data"
-# }
-
-# exempt linked doctypes from being automatically cancelled
-#
-# auto_cancel_exempted_doctypes = ["Auto Repeat"]
-
-# Ignore links to specified DocTypes when deleting documents
-# -----------------------------------------------------------
-
-# ignore_links_on_delete = ["Communication", "ToDo"]
-
-# Request Events
-# ----------------
-# before_request = ["verifico_integration.utils.before_request"]
-# after_request = ["verifico_integration.utils.after_request"]
-
-# Job Events
-# ----------
-# before_job = ["verifico_integration.utils.before_job"]
-# after_job = ["verifico_integration.utils.after_job"]
-
-# User Data Protection
-# --------------------
-
-# user_data_fields = [
-# 	{
-# 		"doctype": "{doctype_1}",
-# 		"filter_by": "{filter_by}",
-# 		"redact_fields": ["{field_1}", "{field_2}"],
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_2}",
-# 		"filter_by": "{filter_by}",
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_3}",
-# 		"strict": False,
-# 	},
-# 	{
-# 		"doctype": "{doctype_4}"
-# 	}
-# ]
-
-# Authentication and authorization
-# --------------------------------
-
-# auth_hooks = [
-# 	"verifico_integration.auth.validate"
-# ]
-
-# Automatically update python controller files with type annotations for this app.
-# export_python_type_annotations = True
-
-# default_log_clearing_doctypes = {
-# 	"Logging DocType Name": 30  # days to retain logs
-# }
-
-# Translation
-# ------------
-# List of apps whose translatable strings should be excluded from this app's translations.
-# ignore_translatable_strings_from = []
-

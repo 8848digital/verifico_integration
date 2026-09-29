@@ -1,33 +1,40 @@
-### Verifico Integration
+<!--
+Copyright (c) 2026 8848 Digital LLP. All rights reserved.
+Proprietary and confidential. Unauthorized copying, distribution, or use
+of this file, via any medium, is strictly prohibited without prior
+written permission from 8848 Digital LLP.
+-->
 
-Verifico integration for Frappe/ERPNext
+# Verifico Integration
 
-### Installation
+## Overview
+Custom Frappe/ERPNext app by 8848 Digital LLP for the Verifico integration.
+Functional details are added here as features are built.
 
-You can install this app using the [bench](https://github.com/frappe/bench) CLI:
+## Key DocTypes
+_None yet — this section is filled in as DocTypes are added._
 
-```bash
-cd $PATH_TO_YOUR_BENCH
-bench get-app $URL_OF_THIS_REPO --branch develop
-bench install-app verifico_integration
-```
+## Features
+_Initial app setup only — features are listed here as they are built._
 
-### Contributing
+## Installation
 
-This app uses `pre-commit` for code formatting and linting. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:
+    bench get-app verifico_integration https://github.com/8848digital/verifico_integration --branch develop
+    bench --site <site_name> install-app verifico_integration
 
-```bash
-cd apps/verifico_integration
-pre-commit install
-```
+## App Structure
+See [CLAUDE.md](./CLAUDE.md) for internal module/folder layout and coding conventions.
 
-Pre-commit is configured to use the following tools for checking and formatting your code:
+## Contributing
+This app uses `pre-commit` for formatting and linting (black, isort, flake8,
+prettier, eslint, max-lines check) and Conventional Commits:
 
-- ruff
-- eslint
-- prettier
-- pyupgrade
+    cd apps/verifico_integration
+    pre-commit install
 
-### License
+## Maintainers
+8848 Digital LLP — mahak@8848digital.com
 
-mit
+## License
+Proprietary — Copyright (c) 2026 8848 Digital LLP. All rights reserved.
+See [license.txt](license.txt) for details.
