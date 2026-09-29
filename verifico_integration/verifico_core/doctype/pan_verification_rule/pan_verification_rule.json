@@ -1,0 +1,131 @@
+{
+ "actions": [],
+ "autoname": "field:rule_name",
+ "creation": "2026-09-30 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "rule_name",
+  "enabled",
+  "reference_doctype",
+  "condition",
+  "column_break_rule",
+  "amount_field",
+  "threshold_amount",
+  "action",
+  "check_on",
+  "section_party",
+  "party_field"
+ ],
+ "fields": [
+  {
+   "fieldname": "rule_name",
+   "fieldtype": "Data",
+   "label": "Rule Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Reference DocType",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "description": "Optional Python expression, e.g. doc.customer_group == \"Retail\"",
+   "fieldname": "condition",
+   "fieldtype": "Code",
+   "label": "Condition",
+   "options": "PythonExpression"
+  },
+  {
+   "fieldname": "column_break_rule",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "grand_total",
+   "description": "Currency/Float/Int field compared with the threshold.",
+   "fieldname": "amount_field",
+   "fieldtype": "Data",
+   "label": "Amount Field",
+   "reqd": 1
+  },
+  {
+   "default": "200000",
+   "description": "PAN verification is required when the amount is at or above this value.",
+   "fieldname": "threshold_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Threshold Amount",
+   "reqd": 1
+  },
+  {
+   "default": "Block",
+   "description": "Block: the document cannot be saved/submitted until the PAN is verified as valid. Warn: show a message only.",
+   "fieldname": "action",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Action",
+   "options": "Block\nWarn",
+   "reqd": 1
+  },
+  {
+   "default": "Submit",
+   "description": "Save works for any DocType; Submit only for submittable DocTypes.",
+   "fieldname": "check_on",
+   "fieldtype": "Select",
+   "label": "Check On",
+   "options": "Submit\nSave",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_party",
+   "fieldtype": "Section Break",
+   "label": "Party"
+  },
+  {
+   "description": "Optional Link field naming who the PAN belongs to (e.g. customer). Stored on each verification for audit and reuse.",
+   "fieldname": "party_field",
+   "fieldtype": "Data",
+   "label": "Party Field"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-09-30 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Verifico Core",
+ "name": "PAN Verification Rule",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "rule_name",
+ "track_changes": 1
+}
