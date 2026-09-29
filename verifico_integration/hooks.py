@@ -24,7 +24,7 @@ app_include_js = "verifico_integration.bundle.js"
 # DocType has a PAN Verification Rule.
 doc_events = {
 	"*": {
-		"validate": "verifico_integration.verifico_core.document_events.validate",
-		"before_submit": "verifico_integration.verifico_core.document_events.before_submit",
+		"validate": "verifico_integration.verifico_core.customization.all.all.validate",
+		"before_submit": "verifico_integration.verifico_core.customization.all.all.before_submit",
 	}
 }

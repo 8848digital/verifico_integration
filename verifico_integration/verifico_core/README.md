@@ -27,5 +27,5 @@ verification records, enforcement on save/submit, and the PAN APIs.
 
 ## Code layout
 - `services/` — Verifico client, PAN flows, verification records, rule matching, enforcement, card file checks.
-- `document_events.py` — `doc_events["*"]` validate / before_submit (cached early exit).
+- `customization/all/all.py` — `doc_events["*"]` (all DocTypes) validate / before_submit hooks (cached early exit).
 - `api/v1/pan.py` — verify_pan, read_pan_card, read_and_verify_pan_card, get_pan_status.
