@@ -18,17 +18,13 @@ after_request = [
 	"verifico_integration.utils.api_handlers.response_formatter.format_frappe_response_to_custom"
 ]
 
-# Uncomment and point at the conventional locations as features are added
-# (see CLAUDE.md "Key Conventions"):
-#
-# after_install = "verifico_integration.install.after_install"
-#
-# doc_events = {
-# 	"<DocType>": {
-# 		"on_update": "verifico_integration.verifico_core.customization.<doctype>.<doctype>.on_update"
-# 	}
-# }
-#
-# scheduler_events = {
-# 	"hourly": ["verifico_integration.verifico_core.tasks.hourly"],
-# }
+app_include_js = "verifico_integration.bundle.js"
+
+# Every save passes through these; they exit after a cached lookup unless the
+# DocType has a PAN Verification Rule.
+doc_events = {
+	"*": {
+		"validate": "verifico_integration.verifico_core.document_events.validate",
+		"before_submit": "verifico_integration.verifico_core.document_events.before_submit",
+	}
+}

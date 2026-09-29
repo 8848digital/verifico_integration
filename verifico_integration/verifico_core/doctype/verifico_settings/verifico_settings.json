@@ -1,0 +1,96 @@
+{
+ "actions": [],
+ "creation": "2026-09-30 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "base_url",
+  "api_key",
+  "column_break_general",
+  "timeout_seconds",
+  "reuse_valid_days",
+  "max_file_size_mb",
+  "max_calls_per_user_per_hour"
+ ],
+ "fields": [
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "default": "https://api.theverifico.com",
+   "description": "Verifico API root, e.g. https://api.theverifico.com",
+   "fieldname": "base_url",
+   "fieldtype": "Data",
+   "label": "Base URL",
+   "mandatory_depends_on": "enabled"
+  },
+  {
+   "description": "Sent as the X-API-Key header.",
+   "fieldname": "api_key",
+   "fieldtype": "Password",
+   "label": "API Key",
+   "mandatory_depends_on": "enabled"
+  },
+  {
+   "fieldname": "column_break_general",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "30",
+   "description": "5 to 60 seconds.",
+   "fieldname": "timeout_seconds",
+   "fieldtype": "Int",
+   "label": "Timeout (Seconds)"
+  },
+  {
+   "default": "365",
+   "description": "A PAN verified as valid within this many days is reused instead of calling Verifico again (saves credits). 0 = always call.",
+   "fieldname": "reuse_valid_days",
+   "fieldtype": "Int",
+   "label": "Reuse Valid Result For (Days)"
+  },
+  {
+   "default": "20",
+   "fieldname": "max_file_size_mb",
+   "fieldtype": "Int",
+   "label": "Max PAN Card File Size (MB)"
+  },
+  {
+   "default": "60",
+   "description": "Protects credits from repeated clicks or scripts. Counts only real (paid) calls; reused results are free. 0 = no limit.",
+   "fieldname": "max_calls_per_user_per_hour",
+   "fieldtype": "Int",
+   "label": "Max Verifico Calls per User per Hour"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-09-30 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Verifico Core",
+ "name": "Verifico Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
