@@ -26,6 +26,8 @@ require a verified PAN on any document above an amount (e.g. sales of
 - Verify a PAN by number, or upload the PAN card (image/PDF) to read and verify it.
 - Block (or warn) saving/submitting a document above the threshold until its PAN is verified as valid.
 - Reuse a recent valid result for the same PAN — no second charge.
+- Returning customers: their last verified PAN is pre-filled on new documents, and a
+  warning appears if a different PAN is entered for them.
 - Credit protection: PAN format and real file type checked before calling, no retry of timed-out calls,
   per-user hourly call limit, only draft documents can be verified.
 - Every check is recorded (success, invalid or failure) with credits used.

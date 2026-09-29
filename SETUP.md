@@ -44,6 +44,8 @@ card read = 1, card read + verify = 4.
 | Check On | Select | Yes | Submit (submittable DocTypes) or Save. |
 | Condition | Code | — | Optional Python expression, e.g. `doc.customer_group == "Retail"`. |
 | Party Field | Data | — | Link field of the PAN holder, e.g. `customer`. |
+| Pre-fill Last Verified PAN | Check | — | Default on. New documents with no PAN get the party's last valid PAN. |
+| Warn on Different PAN | Check | — | Default on. Warns (does not block) when the PAN differs from the party's last verified PAN. |
 
 ### Site Config / Environment Variables
 None.
