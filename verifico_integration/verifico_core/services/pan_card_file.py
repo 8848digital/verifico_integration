@@ -41,9 +41,10 @@ def load_pan_card(file_url: str) -> tuple[str, bytes, str]:
 			_("Unsupported file type {0}. Allowed: JPG, PNG, PDF").format(content_type or "unknown")
 		)
 
-	content = file_doc.get_content()
-	if isinstance(content, str):
-		content = content.encode()
+	# Read the raw bytes: File.get_content() may decode binary files as text
+	# (Frappe v16 tries windows-125x encodings), which corrupts images and PDFs.
+	with open(file_doc.get_full_path(), "rb") as file:
+		content = file.read()
 	if not content.startswith(FILE_SIGNATURES):
 		frappe.throw(
 			_("The file is not a real JPG, PNG or PDF (its content does not match the extension)")
